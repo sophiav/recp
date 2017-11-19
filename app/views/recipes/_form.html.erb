@@ -1,0 +1,15 @@
+<%= form_for @recipe do |f| %>
+ <%= f.label :title, "Recipe Title" %>
+ <%= f.text_field :title %>
+
+ <%= f.label :category %>
+ <%= f.text_field :category %>
+
+ <%= f.label :description, "Instructions" %>
+ <%= f.text_area :description %>
+
+ <%= f.label :prep_time %>
+ <%= f.number_field :prep_time, placeholder: "(in minutes)" %>
+
+ <%= f.submit %>
+<% end %>
