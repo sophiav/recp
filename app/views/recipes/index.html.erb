@@ -1,7 +1,8 @@
 <h1>Recipe Social</h1>
 
-<ul>
   <% @recipes.each do |recipe| %>
-    <li><%= link_to recipe.title, recipe_path(recipe) %></li>
+    <h2><%= link_to recipe.title, recipe_path(recipe) %></h2>
   <% end %>
-</ul>
+
+
+<%= link_to "Add Recipe", new_recipe_path %>
