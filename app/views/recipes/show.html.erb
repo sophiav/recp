@@ -1,0 +1,9 @@
+<h1><%= @recipe.title %></h1>
+
+<h4><%= @recipe.category %><h4>
+<p>Prep Time: <%= @recipe.prep_time %> minutes</p>
+<h3>Instructions</h3>
+<%= @recipe.description %>
+
+<br><br>
+<%= link_to "Back", root_path %>
