@@ -12,8 +12,14 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.skip_confirmation!
+      # user.skip_confirmation!
     end
   end
 
+  def apply_omniauth(auth)
+    update_attributes(
+      provider: auth.provider,
+      uid: auth.uid
+      )
+  end
 end
