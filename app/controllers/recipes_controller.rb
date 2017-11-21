@@ -15,10 +15,12 @@ class RecipesController < ApplicationController
   end
 
   def create
-    recipe = Recipe.new(recipe_params)
-    if recipe.save
-      redirect_to recipe_path(recipe)
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
+      flash[:note] = 'success'
+      redirect_to @recipe
     else
+      flash[:alert] = 'oh no'
       render :new
     end
   end
@@ -28,7 +30,7 @@ class RecipesController < ApplicationController
 
   def update
     if @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe)
+      redirect_to @recipe
     else
       render :edit
     end
