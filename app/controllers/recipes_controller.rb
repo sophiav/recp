@@ -17,6 +17,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user_id = current_user.id
     if @recipe.save
       flash[:notice] = 'Successfully created recipe'
       redirect_to @recipe
@@ -48,7 +49,7 @@ class RecipesController < ApplicationController
         :title, 
         :category, 
         :description, 
-        :prep_time, 
+        :prep_time,
         ingredients_attributes: [:id, :name, :quantity, :_destroy]
         )
     end
