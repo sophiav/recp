@@ -1,24 +1,37 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: [:edit, :update, :destroy]
   def new
     @comment = Comment.new
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to recipe_path(params[:recipe_id])
+    recipe = Recipe.find_by(id: params[:recipe_id])
+    @comment = recipe.comments.create(user_id: current_user.id, message: comment_params[:message])
+
+    if @comment
+      flash[:notice] = "Comment added"
     else
-      render :new
+      flash[:alert] = "Cannot submit an empty comment"
     end
+    redirect_to recipe
   end
 
   def edit
   end
 
   def update
+    if @comment.update(comment_params)
+      flash[:notice] = "Comment updated"
+      redirect_to @recipe
+    else
+      flash[:alert] = "Cannot submit an empty comment"
+      render :edit
+    end
   end
 
   def destroy
+    @comment.destroy
+    redirect_to @recipe
   end
 
   private
@@ -28,7 +41,7 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Recipe.find_by(id: params[:recipe_id]).comments.find_by(id: params[:id])
-    # @comment = Comment.find_by(recipe_id: params[:recipe_id], id: params[:id])
+    @recipe = Recipe.find_by(id: params[:recipe_id])
+    @comment = @recipe.comments.find_by(id: params[:id])
   end
 end

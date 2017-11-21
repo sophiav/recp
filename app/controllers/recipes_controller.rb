@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
   end
 
   def new
@@ -17,10 +18,9 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
-      flash[:note] = 'success'
+      flash[:notice] = 'Successfully created recipe'
       redirect_to @recipe
     else
-      flash[:alert] = 'oh no'
       render :new
     end
   end

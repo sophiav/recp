@@ -1,3 +1,14 @@
+<% if @recipe.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger" role="alert">
+    <h3>There were some errors:</h3>
+    <ul>
+      <% @recipe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @recipe do |f| %>
  <%= f.label :title, "Recipe Title" %>
  <%= f.text_field :title %>

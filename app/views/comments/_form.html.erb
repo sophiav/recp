@@ -1,0 +1,6 @@
+<%= form_for [@recipe, @comment] do |f| %>
+  <%= f.label :message %>
+  <%= f.text_area :message %>
+
+  <%= f.submit %>
+<% end %>
