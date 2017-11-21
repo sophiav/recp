@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :ingredients
   has_many :comments
   has_many :commenters, class_name: 'User', through: :comments
