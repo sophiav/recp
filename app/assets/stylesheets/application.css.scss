@@ -13,3 +13,12 @@
  */
 @import "bootstrap";
 @import "recipe";
+@import "forms";
+
+nav.navbar {
+   background-color: #e3f2fd;
+}
+
+#flash-messages {
+  margin-top: 20px;
+}

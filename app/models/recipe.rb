@@ -2,7 +2,7 @@ class Recipe < ApplicationRecord
   belongs_to :user
   has_many :ingredients
   has_many :comments
-  has_many :commenters, class_name: 'User', through: :comments
+  has_many :commentators, through: :comments, class_name: 'User'
 
   validates :title, :description, :category, presence: true
   validates :title, length: { in: 1..30 }

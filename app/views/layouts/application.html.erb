@@ -9,36 +9,13 @@
   </head>
 
   <body>
+  <%= render 'layouts/navbar' %>
 
-    <nav class="navbar navbar-default">
-      <div class="container">
-
-        <div class="navbar-header">
-          <%= link_to "RecipeSocial", root_path, class: "navbar-brand" %>
-        </div>
-
-        <ul class="nav navbar-new">
-          <% if user_signed_in? %>
-            <li class="nav-item"><p class="nav-link">Signed in as <%= current_user.email %></p></li>
-            <li class="nav-item"><%= link_to "Add Recipe", new_recipe_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-          <% else %>
-            <li class="nav-item"><%= link_to "Sign up", new_user_registration_path, class: "nav-link"%></li>
-            <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link"%></li>
-          <% end %>
-        </ul>
-
-      </div>
-    </nav>
-
-
-    <% if flash[:notice].present? %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if flash[:alert].present? %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    
+  <div class="container">
+    <%= render 'layouts/flash_messages' %>
+  
     <%= yield %>
+  </div>
+
   </body>
 </html>

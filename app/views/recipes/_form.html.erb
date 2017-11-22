@@ -1,37 +1,57 @@
 <% if @recipe.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger" role="alert">
+  <div id="error_explanation" class="alert alert-danger alert-dismissible fade show" role="alert">
     <h3>There were some errors:</h3>
     <ul>
       <% @recipe.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
   </div>
 <% end %>
 
 <%= form_for @recipe do |f| %>
- <%= f.label :title, "Recipe Title" %>
- <%= f.text_field :title %>
+ 
+  <div class="form-group">
+    <%= f.label :title, "Recipe Title" %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
 
- <%= f.label :category %>
- <%= f.text_field :category %>
+  <div class="form-group form-row">
+    <div class="col">
+      <%= f.label :prep_time %>
+      <%= f.number_field :prep_time, placeholder: "(in minutes)", class: 'form-control' %>
+    </div>   
 
- <%= f.label :description, "Instructions" %>
- <%= f.text_area :description %>
+    <div class="col">
+      <%= f.label :category %>
+      <%= f.text_field :category, class: 'form-control' %>
+    </div>
+  </div>
 
- <%= f.label :prep_time %>
- <%= f.number_field :prep_time, placeholder: "(in minutes)" %>
+  <div class="form-group">
+    <%= f.label :description, "Instructions" %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <fieldset>
+      <p>
+        Ingredients
+      </p>
+      <%= f.fields_for :ingredients do |ingredient| %>
+        <%= render 'ingredient_fields', f: ingredient %>
+      <% end %>
 
-<fieldset>
-   Ingredients:
-   <%= f.fields_for :ingredients do |ingredient| %>
-      <%= render 'ingredient_fields', f: ingredient %>
-   <% end %>
+      <div class="links">
+        <%= link_to_add_association '+ add ingredient', f, :ingredients, class: 'btn btn-outline-primary add-ingredient' %>
+      </div>
+    </fieldset>
+  </div>
 
-   <div class="links">
-    <%= link_to_add_association 'Add Ingredient', f, :ingredients %>
-   </div>
- </fieldset>
-
- <%= f.submit %>
+  <div class="form-buttons">
+    <%= f.submit class: 'btn btn-lg btn-primary' %>
+  </div>
 <% end %>

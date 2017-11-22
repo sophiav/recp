@@ -18,10 +18,13 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
+
     if @recipe.save
       flash[:notice] = 'Successfully created recipe'
       redirect_to @recipe
     else
+      # because we reject_if empty and we still want to show something to the user
+      @recipe.ingredients.build
       render :new
     end
   end

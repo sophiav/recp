@@ -1,0 +1,31 @@
+form {
+  fieldset {
+    background-color: #eeeeee63;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+}
+
+.add-ingredient {
+  margin-top: 10px;
+}
+
+.nested-fields {
+  margin-bottom: 10px;
+}
+
+.form-buttons {
+  input {
+    cursor: pointer;
+  }
+}
+
+.field_with_errors {
+  label {
+    color: red;
+  }
+  .form-control {
+    @extend .is-invalid;  
+  }
+  
+}
