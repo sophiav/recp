@@ -1,0 +1,23 @@
+<ul id="comments" class="list-unstyled">
+  <% @recipe.comments.each do |comment| %>
+  <li>
+    <div class="card">
+      <div class="card-header">
+        <%= comment.user.name.to_s %>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>
+           <%= comment.message %> 
+           <% if owner?(comment) %>
+            <span class="comment-options">
+              <%= link_to "Edit", edit_recipe_comment_path(@recipe, comment) %> | <%= link_to "Delete", recipe_comment_path(@recipe, comment), method: :delete %>
+            </span>
+           <% end %>
+         </p>
+       </blockquote>
+     </div>
+   </div>
+  </li>
+ <% end %>
+</ul>

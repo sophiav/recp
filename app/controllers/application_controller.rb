@@ -1,7 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  # def after_sign_in_path_for(resource)
-  #   request.env['omniauth.origin'] || root_path
-  # end
+  helper_method :owner?
+  def owner?(resource)
+    resource.user_id == current_user.id
+  end
+
+  def authorize_user!(resource)
+    if !owner?(resource)
+      flash[:alert] = "You are not allowed to change someone else's #{resource.model_name.to_s.downcase}."
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
 end

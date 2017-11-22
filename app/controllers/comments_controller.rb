@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action only: [:edit, :update, :destroy] { authorize_user!(@comment) }
+
   def new
     @comment = Comment.new
   end
@@ -44,4 +46,5 @@ class CommentsController < ApplicationController
     @recipe = Recipe.find_by(id: params[:recipe_id])
     @comment = @recipe.comments.find_by(id: params[:id])
   end
+
 end
