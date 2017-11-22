@@ -1,6 +1,10 @@
 <%= form_for [@recipe, @comment] do |f| %>
-  <%= f.label :message %>
-  <%= f.text_area :message %>
+  <div class="form-group">
+    <%= f.label :message %>
+    <%= f.text_area :message, class: 'form-control' %>
+  </div>
 
-  <%= f.submit %>
+  <div class="form-buttons">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
 <% end %>
