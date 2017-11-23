@@ -3,12 +3,9 @@
   <li>
     <div class="card">
       <div class="card-header">
-        <strong><%= comment.user.name.to_s %></strong>
-        -
-        <small><%= comment.updated_at.strftime("%e %B %Y %H:%M %p") %></small>
+        <small><strong><%= comment.user.name.to_s %></strong> - <%= comment.updated_at.strftime("%e %B %Y %H:%M %p") %></small>
       </div>
       <div class="card-body">
-        <blockquote class="blockquote mb-0">
           <p>
            <%= comment.message %> 
            <% if owner?(comment) %>
@@ -17,7 +14,6 @@
             </span>
            <% end %>
          </p>
-       </blockquote>
      </div>
    </div>
   </li>

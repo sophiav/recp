@@ -1,7 +1,6 @@
 <%= form_for [@recipe, @comment] do |f| %>
   <div class="form-group">
-    <%= f.label :message %>
-    <%= f.text_area :message, class: 'form-control' %>
+    <%= f.text_area :message, placeholder: 'Type in your comment...', class: 'form-control' %>
   </div>
 
   <div class="form-buttons">

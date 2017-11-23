@@ -14,21 +14,22 @@
 }
 
 
-.recipe {
+.recipe-box {
   margin-bottom: 50px;
   position: relative;
   cursor: pointer;
 
-  &:hover .recipe-title {
+  &:hover .recipe-box-title {
     visibility: visible;
     z-index: 1;
+    font-family: 'Amatic SC', cursive;
   }
 
-  &:hover .recipe-image {
+  &:hover .recipe-box-image {
     transform: scale(1.075);
   }
 
-  .recipe-title {
+  .recipe-box-title {
     visibility: hidden;
     position: absolute;
     top: 0;
@@ -44,13 +45,56 @@
     font-size: 34px;
     
     p {
-     text-shadow: -1px 2px 20px rgba(79,79,79,1)
-   }
- }
+     text-shadow: -1px 2px 20px rgba(79,79,79,1);
+    }
+  }
+
+  .recipe-box-image {
+    width: 100%;
+    transition: all 0.3s ease-out;
+  }
+}
+
+.recipe-title {
+  font-size: 100px;
+  font-weight: bold;
+  font-family: 'Amatic SC', cursive;
+}
+
+.recipe-details {
+  font-family: 'Raleway', sans-serif;
 }
 
 .recipe-image {
-  width: 100%;
-  transition: all 0.3s ease-out;
+  box-shadow: 3px 5px 41px -6px rgba(214,214,214,1);
 }
 
+.recipe-smaller-box {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.recipe-ingredients {
+  table {
+    margin: 0 auto;
+    text-align: left;
+
+    td.ingredient-quantity {
+      font-weight: bold;
+      padding-right: 15px;
+    }
+  }
+}
+
+.recipe-ingredients,
+.recipe-instructions {
+  margin-top: 40px;
+}
+
+.recipe-instructions h3,
+.recipe-ingredients h3,
+.recipe-comments h3 {
+  font-size: 50px;
+  font-family: 'Amatic SC', cursive;
+}

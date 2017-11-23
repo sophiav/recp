@@ -15,8 +15,24 @@
 @import "recipe";
 @import "forms";
 
+
+html, body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+// font-family: 'Raleway', sans-serif;
+// font-family: 'Oswald', sans-serif;
+// font-family: 'Gloria Hallelujah', cursive;
+// font-family: 'Amatic SC', cursive;
 nav.navbar {
-   background-color: #e3f2fd;
+   border-bottom: 1px solid #18befe;
+   border-width: 4px;
+   font-weight: bold;
+
+   a, a.active, a:visited {
+    color: #18befe;
+   }
+
 }
 
 #flash-messages {
@@ -27,4 +43,5 @@ nav.navbar {
   margin-top: 50px;
 }
 
-// 6b15a1
+// 6b15a1 - purpleish
+// 18befe - blueish

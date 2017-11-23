@@ -4,13 +4,13 @@
     <% recipes.each do |recipe| %>
       <div class="col-sm">
         
-        <div class="recipe">
+        <div class="recipe-box">
           <%= link_to recipe_path(recipe) do %>
-            <div class="recipe-title">
+            <div class="recipe-box-title">
               <p><%= recipe.title %></p>
             </div>
-            <div class="recipe-image-wrapper">
-              <%= image_tag recipe.image.url(:medium), class: 'recipe-image rounded' %>
+            <div class="recipe-box-image-wrapper">
+              <%= image_tag recipe.image.url(:medium), class: 'recipe-box-image rounded' %>
             </div>
           <% end %>
         </div>
