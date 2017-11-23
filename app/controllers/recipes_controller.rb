@@ -54,6 +54,7 @@ class RecipesController < ApplicationController
         :category, 
         :description, 
         :prep_time,
+        :image,
         ingredients_attributes: [:id, :name, :quantity, :_destroy]
         )
     end

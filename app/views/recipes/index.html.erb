@@ -1,3 +1,22 @@
-<% @recipes.each do |recipe| %>
-  <h2><%= link_to recipe.title, recipe_path(recipe) %></h2>
+<% @recipes.each_slice(3) do |recipes| %>
+  <div class="row">
+
+    <% recipes.each do |recipe| %>
+      <div class="col-sm">
+        
+        <div class="recipe">
+          <%= link_to recipe_path(recipe) do %>
+            <div class="recipe-title">
+              <p><%= recipe.title %></p>
+            </div>
+            <div class="recipe-image-wrapper">
+              <%= image_tag recipe.image.url(:medium), class: 'recipe-image rounded' %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    <% end %>
+
+  </div>
 <% end %>
