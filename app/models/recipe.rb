@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :commentators, through: :comments, class_name: 'User'
 
-  validates :title, :description, :category, presence: true
+  validates :title, :description, :category, :image, presence: true
   validates :title, length: { in: 1..30 }
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: proc { |attributes| attributes['name'].blank? }
