@@ -4,11 +4,12 @@ class RecipesController < ApplicationController
   before_action only: [:edit, :update, :destroy] { authorize_user!(@recipe) }
   
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.most_recently_updated
   end
 
   def show
     @comment = Comment.new
+    @comments = @recipe.most_recent_comments
   end
 
   def new

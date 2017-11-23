@@ -1,5 +1,5 @@
 <ul id="comments" class="list-unstyled">
-  <% @recipe.comments.each do |comment| %>
+  <% comments.each do |comment| %>
   <li>
     <div class="card">
       <div class="card-header">
@@ -10,7 +10,7 @@
            <%= comment.message %> 
            <% if owner?(comment) %>
             <span class="comment-options">
-              <%= link_to "Edit", edit_recipe_comment_path(@recipe, comment) %> | <%= link_to "Delete", recipe_comment_path(@recipe, comment), method: :delete %>
+              <%= link_to "Edit", edit_recipe_comment_path(recipe, comment) %> | <%= link_to "Delete", recipe_comment_path(recipe, comment), method: :delete %>
             </span>
            <% end %>
          </p>

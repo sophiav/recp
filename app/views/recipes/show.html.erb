@@ -1,5 +1,10 @@
-<h1 class="recipe-title text-center"><%= @recipe.title %></h1>
-<h4 class="recipe-details text-center"><small class="text-muted"><%= @recipe.category.downcase %>  |  <%= @recipe.prep_time %> minutes </small></h4>
+<h1 class="recipe-title text-center">
+  <%= @recipe.title %>
+</h1>
+
+<h4 class="recipe-details text-center">
+  <small class="text-muted"><%= @recipe.category.downcase %>  |  <%= @recipe.prep_time %> minutes</small>
+</h4>
 
 <% if @recipe.image.file? %>
   <%= image_tag @recipe.image.url(:large), class: 'recipe-image img-fluid rounded mx-auto d-block' %>
@@ -40,8 +45,13 @@
   <%= render 'comments/form' %>
 
   <% if @recipe.comments.present? %>
-    <%= render 'comments/all' %>
+    <!-- only show 3 comments on the recipe page -->
+    <%= render 'comments/recipe_comments', comments: @comments, recipe: @recipe %>
+    <div class="text-center">
+      <%= link_to "View all comments", recipe_comments_path(@recipe) %>
+    </div>
   <% end %>
+
 </div>
 
 <%= link_to "<< Back to Recipes", root_path, class: 'btn btn-outline-primary btn-small back-to-recipes-button'%> 

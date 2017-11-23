@@ -11,4 +11,12 @@ class Recipe < ApplicationRecord
 
   has_attached_file :image, styles: { medium: "300x300#", large: "500x500#"  }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+
+  def self.most_recently_updated
+    order('updated_at DESC').limit(30)
+  end
+
+  def most_recent_comments
+    comments.limit(3)
+  end
 end
