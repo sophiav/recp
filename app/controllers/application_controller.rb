@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :owner?
   def owner?(resource)
-    resource.user_id == current_user.id
+    current_user && resource.user_id == current_user.id
   end
 
   def authorize_user!(resource)
