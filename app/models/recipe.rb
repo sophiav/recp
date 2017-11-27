@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
   has_many :ingredients, dependent: :destroy
 
   has_many :comments, dependent: :destroy
-  has_many :commentators, through: :comments, class_name: 'User'
+  has_many :commentators, through: :comments, source: :user
 
   has_many :recipe_categories, dependent: :destroy
   has_many :categories, through: :recipe_categories
