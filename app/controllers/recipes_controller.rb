@@ -56,8 +56,11 @@ class RecipesController < ApplicationController
         :description, 
         :prep_time,
         :image,
-        ingredients_attributes: [:id, :name, :quantity, :_destroy]
+        ingredients_attributes: [:id, :name, :quantity, :_destroy],
+        category_ids: [],
+        categories_attributes: [:name]
         )
+
     end
 
     def set_recipe

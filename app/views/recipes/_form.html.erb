@@ -26,7 +26,7 @@
     </div>   
 
     <div class="col">
-      <%= f.label :category %>
+      <%= f.label :category, "Category WRONG" %>
       <%= f.text_field :category, class: 'form-control' %>
     </div>
   </div>
@@ -34,6 +34,16 @@
   <div class="form-group">
     <%= f.label :description, "Instructions" %>
     <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <p>Category</p>
+    <%= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true} %>
+
+    <%= f.fields_for :categories, @recipe.categories.build do |categories_fields| %>
+      <%= categories_fields.text_field :name %>
+    <% end %>
+    
   </div>
   
   <div class="form-group">
