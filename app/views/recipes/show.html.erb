@@ -3,7 +3,10 @@
 </h1>
 
 <h4 class="recipe-details text-center">
-  <small class="text-muted"><%= @recipe.category.downcase %>  |  <%= @recipe.prep_time %> minutes</small>
+  <small class="text-muted">
+    <%= display_recipe_categories(@recipe.categories) %>
+  </small>
+  <small><%= @recipe.prep_time %> minutes</small>
 </h4>
 
 <% if @recipe.image.file? %>

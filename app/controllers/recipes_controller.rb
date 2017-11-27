@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @categories = Category.all
     @recipe.ingredients.build
   end
 
@@ -32,6 +33,7 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    @categories = Category.all
   end
 
   def update
