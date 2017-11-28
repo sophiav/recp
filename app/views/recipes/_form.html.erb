@@ -31,16 +31,18 @@
 
   <div class="form-group">
     <fieldset>
-    <% if @categories.present? %>
-      <%= f.label 'Category (select one or more categories)' %>
-      <%= f.collection_select :category_ids, @categories, :id, :name, {}, {multiple: true,  class: 'form-control'} %>
-    <% end %>
+      <% if @categories.present? %>
+        <%= f.label 'Category (select one or more categories)' %>
+        <%= f.collection_select :category_ids, @categories, :id, :name, {}, {multiple: true,  class: 'form-control'} %>
+      <% end %>
 
-    <br/>
-    <%= f.fields_for :categories, @recipe.categories.build do |categories_fields| %>
-      <%= categories_fields.label 'or create a new category' %>
-      <%= categories_fields.text_field :name, class: 'form-control' %>
-    <% end %>
+      <br/>
+
+      <%= f.fields_for :categories, @new_category do |categories_fields| %>
+        <%= categories_fields.label 'or create a new category' %>
+        <%= categories_fields.text_field :name, class: 'form-control' %>
+      <% end %>
+    
     </fieldset>
   </div>
   
