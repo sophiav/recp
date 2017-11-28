@@ -47,12 +47,14 @@
   <h3>Comments</h3>
   <%= render 'comments/form' %>
 
-  <% if @recipe.comments.present? %>
+  <% if @comments.present? %>
     <!-- only show 3 comments on the recipe page -->
     <%= render 'comments/recipe_comments', comments: @comments, recipe: @recipe %>
+
     <div class="text-center">
       <%= link_to "View all comments", recipe_comments_path(@recipe) %>
     </div>
+
   <% end %>
 
 </div>

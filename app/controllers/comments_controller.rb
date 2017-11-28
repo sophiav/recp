@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action only: [:edit, :update, :destroy] { authorize_user!(@comment) }
 
   def index
-    @recipe = Recipe.find_by(params[:recipe_id])
+    @recipe = Recipe.find_by(id: params[:recipe_id])
     @comments = @recipe.comments
   end
 
