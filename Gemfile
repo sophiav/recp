@@ -27,6 +27,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk', '~> 2.3'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
