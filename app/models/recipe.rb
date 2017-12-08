@@ -26,7 +26,7 @@ class Recipe < ApplicationRecord
   end
 
   def self.most_recently_updated
-    order('updated_at DESC').limit(30)
+    order('updated_at DESC').limit(9)
   end
 
   def most_recent_comments

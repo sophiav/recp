@@ -4,7 +4,11 @@ class RecipesController < ApplicationController
   before_action only: [:edit, :update, :destroy] { authorize_user!(@recipe) }
   
   def index
-    @recipes = Recipe.most_recently_updated
+    if request.path == '/all'
+      @recipes = Recipe.all
+    else
+      @recipes = Recipe.most_recently_updated
+    end
   end
 
   def show
@@ -27,7 +31,6 @@ class RecipesController < ApplicationController
       flash[:notice] = 'Successfully created recipe'
       redirect_to @recipe
     else
-      # because we reject_if empty and we still want to show something to the user
       @recipe.ingredients.build
       render :new
     end
