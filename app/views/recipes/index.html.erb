@@ -21,6 +21,8 @@
   </div>
 <% end %>
 
-<div class='text-center'>
-  <%= link_to 'View all Recipes', all_recipes_path %>
-</div>
+<% if request.path != '/all' %>
+  <div class='text-center'>
+    <%= link_to 'View all Recipes', all_recipes_path %>
+  </div>
+<% end %>
