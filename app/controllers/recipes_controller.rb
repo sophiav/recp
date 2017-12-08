@@ -5,9 +5,9 @@ class RecipesController < ApplicationController
   
   def index
     if request.path == '/all'
-      @recipes = Recipe.all
-    else
       @recipes = Recipe.most_recently_updated
+    else
+      @recipes = Recipe.most_recently_updated.limit(9)
     end
   end
 
