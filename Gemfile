@@ -28,6 +28,8 @@ gem 'omniauth-facebook'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3'
 
+gem 'active_model_serializers', '0.10.6'
+
 group :production do
   gem 'pg'
 end
