@@ -24,6 +24,18 @@ class Recipe {
   }
 }
 
+Recipe.renderAll = function() {
+  const allRecipes = Recipe.all();
+
+  allRecipes.done((response) => {
+    const recipes = response.data.map(recipe => {
+      return new Recipe(recipe.id, recipe.attributes).renderForIndex();
+    });
+
+    $('#recipes').html(recipes);
+  });
+}
+
 Recipe.renderMostRecentlyUpdated = function() {
   const allRecipes = Recipe.mostRecentlyUpdated();
 
@@ -32,10 +44,14 @@ Recipe.renderMostRecentlyUpdated = function() {
       return new Recipe(recipe.id, recipe.attributes).renderForIndex();
     });
 
-    $('#recipes').append(recipes);
+    $('#recipes').html(recipes);
   });
 }
 
 Recipe.mostRecentlyUpdated = function() {
   return $.get('/recipes');
+}
+
+Recipe.all = function() {
+  return $.get('/all');
 }

@@ -1,7 +1,15 @@
 <div id="recipes"></div>
+<div class='text-center'>
+  <a href="#" class="view-all-recipes">View all Recipes</a>
+</div>
 
 <script type="text/javascript" charset="utf-8">
   $(function() {
     Recipe.renderMostRecentlyUpdated();
+
+    $('.view-all-recipes').on('click', function(e) {
+      e.preventDefault();
+      Recipe.renderAll();
+    });
   });
 </script>
