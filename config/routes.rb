@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  
-  root 'recipes#index'
+
+  # root 'recipes#index'
+  root 'static#index'
 
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
-  
+
   resources :recipes do
     resources :ingredients
     resources :comments

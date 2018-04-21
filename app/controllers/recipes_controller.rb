@@ -2,13 +2,15 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action only: [:edit, :update, :destroy] { authorize_user!(@recipe) }
-  
+
   def index
     if request.path == '/all'
       @recipes = Recipe.most_recently_updated
     else
       @recipes = Recipe.most_recently_updated.limit(9)
     end
+
+    render json: @recipes
   end
 
   def show
@@ -58,9 +60,9 @@ class RecipesController < ApplicationController
 
     def recipe_params
       params.require(:recipe).permit(
-        :title, 
-        :category, 
-        :description, 
+        :title,
+        :category,
+        :description,
         :prep_time,
         :image,
         ingredients_attributes: [:id, :name, :quantity, :_destroy],
