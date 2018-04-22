@@ -10,22 +10,6 @@ function sliceInThrees(arr) {
   return slicedArray;
 }
 
-class Comment {
-  constructor(id, attributes, recipeId) {
-    this.id = id;
-    this.message = attributes.message;
-    this.authorName = attributes['author-name'];
-    // remove the timezone 'Z' from string
-    this.updatedAt = attributes['updated-at'].slice(0, -1);
-    this.isOwner = attributes['is-owner'];
-
-    this.recipeId = recipeId;
-  }
-
-  render() {
-  }
-}
-
 function attachShowPageListeners() {
   $('.next-previous-links a').on('click', function(e) {
     e.preventDefault();

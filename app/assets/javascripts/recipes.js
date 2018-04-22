@@ -93,37 +93,7 @@ class Recipe {
   renderComments() {
     if(this.comments.length > 0) {
       const allComments = this.comments.map(comment => {
-        const updatedAt = strftime("%e %B %Y %H:%M %p", new Date(comment.updatedAt));
-
-        let editControls = '';
-        if(comment.isOwner) {
-          editControls = `
-            <span class="comment-options">
-              <a href="/recipes/${this.id}/comments/${comment.id}/edit">Edit</a> |
-              <a
-                data-confirm="Are you sure you want to delete this comment?"
-                data-method="delete"
-                href="/recipes/${this.id}/comments/${comment.id}">Delete
-              </a>
-            </span>
-          `
-        }
-
-        return `
-          <li>
-            <div class="card">
-              <div class="card-header">
-                <small><strong>${comment.authorName}</strong> - ${updatedAt}</small>
-              </div>
-              <div class="card-body">
-                  <p>
-                   ${comment.message}
-                   ${editControls}
-                 </p>
-             </div>
-           </div>
-          </li>
-        `
+        return comment.render();
       }).join('');
 
       const viewAllCommentsLink = `
