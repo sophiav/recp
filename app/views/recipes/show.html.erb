@@ -77,7 +77,10 @@
     // get the results and replace the content on the page
     const id = $(this).data('id');
     $.get(`/recipes/${id}`).done(function(responseJSON) {
-      console.log(responseJSON);
+      const recipe = new Recipe(responseJSON.data.id, responseJSON.data.attributes);
+
+      console.log(recipe.render());
+      // $('#recipe').html()
     })
   })
 </script>
