@@ -79,8 +79,8 @@
     $.get(`/recipes/${id}`).done(function(responseJSON) {
       const recipe = new Recipe(responseJSON.data.id, responseJSON.data.attributes);
 
-      console.log(recipe.render());
-      // $('#recipe').html()
+      const recipeHTML = recipe.render();
+      $('#recipe').html(recipeHTML);
     })
   })
 </script>

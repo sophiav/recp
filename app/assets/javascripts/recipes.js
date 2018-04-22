@@ -34,17 +34,18 @@ class Recipe {
         categoryHTML += '<span> | </span>';
       }
       return categoryHTML;
-    });
+    }).join('');
   }
 
   renderIngredients() {
     return this.ingredients.map(ingredient => {
-      return `<tr>
-        <td class="ingredient-quantity">${ingredient.quantity}</td>
-        <td>${ingredient.name}</td>
-      </tr>
+      return `
+        <tr>
+          <td class="ingredient-quantity">${ingredient.quantity}</td>
+          <td>${ingredient.name}</td>
+        </tr>
       `
-    });
+    }).join('');
   }
 
   render() {
@@ -70,7 +71,7 @@ class Recipe {
       </h4>
 
 
-      <img src='${this.image.large}' class: 'recipe-image img-fluid rounded mx-auto d-block' />
+      <img src='${this.image.large}' class='recipe-image img-fluid rounded mx-auto d-block' />
 
 
       <div class="recipe-smaller-box">
