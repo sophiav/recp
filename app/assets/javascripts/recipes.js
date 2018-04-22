@@ -26,6 +26,27 @@ class Recipe {
     `
   }
 
+  renderCategories() {
+    return this.categories.map((category, index) => {
+      let categoryHTML = `<span>${category.name.toLowerCase()}</span>`;
+
+      if(index < this.categories.length - 1) {
+        categoryHTML += '<span> | </span>';
+      }
+      return categoryHTML;
+    });
+  }
+
+  renderIngredients() {
+    return this.ingredients.map(ingredient => {
+      return `<tr>
+        <td class="ingredient-quantity">${ingredient.quantity}</td>
+        <td>${ingredient.name}</td>
+      </tr>
+      `
+    });
+  }
+
   render() {
     // <div class="btn-group" role="group">
     //   <div class="form-buttons">
@@ -43,14 +64,7 @@ class Recipe {
 
       <h4 class="recipe-details text-center">
         <small class="text-muted">
-          ${this.categories.map((category, index) => {
-            let categoryHTML = `<span>${category.name.toLowerCase()}</span>`;
-
-            if(index < this.categories.length - 1) {
-              categoryHTML += '<span> | </span>';
-            }
-            return categoryHTML;
-          })}
+          ${this.renderCategories()}
         </small>
         <small>${this.prepTime} minutes</small>
       </h4>
@@ -64,13 +78,7 @@ class Recipe {
           <h3>Ingredients</h3>
           <table>
             <tbody>
-              ${this.ingredients.map(ingredient => {
-                return `<tr>
-                  <td class="ingredient-quantity">${ingredient.quantity}</td>
-                  <td>${ingredient.name}</td>
-                </tr>
-                `
-              })}
+              ${this.renderIngredients()}
             </tbody>
           </table>
         </div>
