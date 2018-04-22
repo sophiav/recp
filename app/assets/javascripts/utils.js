@@ -18,7 +18,7 @@ function attachShowPageListeners() {
     const id = $(this).data('id');
     $.get(`/recipes/${id}`).done(function(responseJSON) {
       const recipe = new Recipe(responseJSON.data.id, responseJSON.data.attributes);
-
+      console.log(responseJSON)
       const recipeHTML = recipe.render();
       $('#recipe').html(recipeHTML);
 

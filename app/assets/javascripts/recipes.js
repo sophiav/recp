@@ -9,6 +9,7 @@ class Recipe {
     this.ingredients = attributes.ingredients;
     this.next = attributes.next;
     this.previous = attributes.previous;
+    this.isOwner = attributes['is-owner'];
   }
 
   renderForIndex() {
@@ -67,15 +68,28 @@ class Recipe {
     `
   }
 
+  renderOwnerControls() {
+    if(this.isOwner) {
+      return `
+        <div class="btn-group" role="group">
+          <div class="form-buttons">
+            <a href="/recipes/${this.id}/edit" class='btn btn-outline-primary btn-sm'>Edit Recipe</a>
+            <a
+              data-confirm="Are you sure you want to delete this recipe?"
+              data-method="delete"
+              href="/recipes/${this.id}" class="btn btn-outline-danger btn-sm"
+              >
+              Delete Recipe
+            </a>
+          </div>
+        </div>
+      `
+    }
+    return '';
+  }
+
   render() {
-    // <div class="btn-group" role="group">
-    //   <div class="form-buttons">
-    //     <% if owner?(@recipe) %>
-    //       <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: 'btn btn-outline-primary btn-sm'%>
-    //       <%= link_to "Delete Recipe", @recipe, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?"}, class: 'btn btn-outline-danger btn-sm' %>
-    //     <% end %>
-    //   </div>
-    // </div>
+
 
     return `
       <h1 class="recipe-title text-center">
@@ -107,7 +121,7 @@ class Recipe {
           <h3>Instructions</h3>
           <p class="text-justify">${this.description}</p>
 
-          // render the edit/delete links
+          ${this.renderOwnerControls()}
         </div>
 
         ${this.renderPreviousAndNextLinks()}
