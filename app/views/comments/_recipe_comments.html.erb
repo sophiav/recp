@@ -7,7 +7,7 @@
       </div>
       <div class="card-body">
           <p>
-           <%= comment.message %> 
+           <%= comment.message %>
            <% if owner?(comment) %>
             <span class="comment-options">
               <%= link_to "Edit", edit_recipe_comment_path(recipe, comment) %> | <%= link_to "Delete", recipe_comment_path(recipe, comment), method: :delete %>

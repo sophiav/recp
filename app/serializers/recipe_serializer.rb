@@ -3,6 +3,8 @@ class RecipeSerializer < ActiveModel::Serializer
               :prep_time, :categories, :ingredients,
               :next, :previous, :is_owner
 
+  has_many :comments
+
   def is_owner
     current_user && object.user_id == current_user.id
   end

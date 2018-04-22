@@ -10,6 +10,22 @@ function sliceInThrees(arr) {
   return slicedArray;
 }
 
+class Comment {
+  constructor(id, attributes, recipeId) {
+    this.id = id;
+    this.message = attributes.message;
+    this.authorName = attributes['author-name'];
+    // remove the timezone 'Z' from string
+    this.updatedAt = attributes['updated-at'].slice(0, -1);
+    this.isOwner = attributes['is-owner'];
+
+    this.recipeId = recipeId;
+  }
+
+  render() {
+  }
+}
+
 function attachShowPageListeners() {
   $('.next-previous-links a').on('click', function(e) {
     e.preventDefault();
@@ -17,11 +33,23 @@ function attachShowPageListeners() {
     // get the results and replace the content on the page
     const id = $(this).data('id');
     $.get(`/recipes/${id}`).done(function(responseJSON) {
-      const recipe = new Recipe(responseJSON.data.id, responseJSON.data.attributes);
-      console.log(responseJSON)
+      const id = responseJSON.data.id;
+      const attributes = responseJSON.data.attributes;
+      const relationships = responseJSON.data.relationships;
+
+      // loop through all the included comments and create a new Comment object
+      let comments = [];
+      responseJSON.included.map(item => {
+        const comment = new Comment(item.id, item.attributes, id);
+        comments.push(comment);
+      });
+
+      const recipe = new Recipe(id, attributes, comments);
       const recipeHTML = recipe.render();
+
       $('#recipe').html(recipeHTML);
 
+      console.log(responseJSON);
       attachShowPageListeners();
     })
   });

@@ -1,5 +1,5 @@
 class Recipe {
-  constructor(id, attributes) {
+  constructor(id, attributes, comments = []) {
     this.id = id;
     this.title = attributes.title;
     this.image = attributes.image;
@@ -10,6 +10,8 @@ class Recipe {
     this.next = attributes.next;
     this.previous = attributes.previous;
     this.isOwner = attributes['is-owner'];
+
+    this.comments = comments;
   }
 
   renderForIndex() {
@@ -88,9 +90,57 @@ class Recipe {
     return '';
   }
 
+  renderComments() {
+    if(this.comments.length > 0) {
+      const allComments = this.comments.map(comment => {
+        const updatedAt = strftime("%e %B %Y %H:%M %p", new Date(comment.updatedAt));
+
+        let editControls = '';
+        if(comment.isOwner) {
+          editControls = `
+            <span class="comment-options">
+              <a href="/recipes/${this.id}/comments/${comment.id}/edit">Edit</a> |
+              <a
+                data-confirm="Are you sure you want to delete this comment?"
+                data-method="delete"
+                href="/recipes/${this.id}/comments/${comment.id}">Delete
+              </a>
+            </span>
+          `
+        }
+
+        return `
+          <li>
+            <div class="card">
+              <div class="card-header">
+                <small><strong>${comment.authorName}</strong> - ${updatedAt}</small>
+              </div>
+              <div class="card-body">
+                  <p>
+                   ${comment.message}
+                   ${editControls}
+                 </p>
+             </div>
+           </div>
+          </li>
+        `
+      }).join('');
+
+      const viewAllCommentsLink = `
+        <a href="/recipes/${this.id}/comments">View all Comments</a>
+      `
+
+      return `
+        <ul id="comments" class="list-unstyled">
+          ${allComments}
+        </ul>
+
+        ${viewAllCommentsLink}
+      `
+    }
+  }
+
   render() {
-
-
     return `
       <h1 class="recipe-title text-center">
         ${this.title}
@@ -125,6 +175,14 @@ class Recipe {
         </div>
 
         ${this.renderPreviousAndNextLinks()}
+      </div>
+
+      <div class="recipe-comments">
+        <h3>Comments</h3>
+
+        // form
+
+        ${this.renderComments()}
 
       </div>
     `

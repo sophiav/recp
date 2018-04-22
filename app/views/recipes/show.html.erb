@@ -54,26 +54,25 @@
 
   </div>
 
+  <div class="recipe-comments">
+    <h3>Comments</h3>
+    <%= render 'comments/form' %>
+
+    <% if @comments.present? %>
+      <!-- only show 3 comments on the recipe page -->
+      <%= render 'comments/recipe_comments', comments: @comments, recipe: @recipe %>
+
+      <div class="text-center">
+        <%= link_to "View all Comments", recipe_comments_path(@recipe) %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+
+  <%= link_to "<< Back to Recipes", root_path, class: 'btn btn-outline-primary btn-small back-to-recipes-button'%>
 </div>
-
-<div class="recipe-comments">
-  <h3>Comments</h3>
-  <%= render 'comments/form' %>
-
-  <% if @comments.present? %>
-    <!-- only show 3 comments on the recipe page -->
-    <%= render 'comments/recipe_comments', comments: @comments, recipe: @recipe %>
-
-    <div class="text-center">
-      <%= link_to "View all Comments", recipe_comments_path(@recipe) %>
-    </div>
-
-  <% end %>
-
-</div>
-
-<%= link_to "<< Back to Recipes", root_path, class: 'btn btn-outline-primary btn-small back-to-recipes-button'%>
-
 <script type="text/javascript" charset="utf-8">
   attachShowPageListeners();
 </script>

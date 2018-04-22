@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
     @comments = @recipe.most_recent_comments
 
     respond_to do |format|
-      format.json { render json: @recipe, include: ['ingredients', 'categories'] }
+      format.json { render json: @recipe, include: ['comments'] }
       format.html
     end
   end
