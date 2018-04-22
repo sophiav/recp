@@ -96,16 +96,10 @@ class Recipe {
         return comment.render();
       }).join('');
 
-      const viewAllCommentsLink = `
-        <a href="/recipes/${this.id}/comments">View all Comments</a>
-      `
-
       return `
         <ul id="comments" class="list-unstyled">
           ${allComments}
         </ul>
-
-        ${viewAllCommentsLink}
       `
     }
   }
