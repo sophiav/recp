@@ -51,13 +51,7 @@ Comment.prototype.render = function() {
 // Method on the Class to help with rendering many comments
 // Used in Recipe object to render all its comments
 Comment.renderAll = function(comments) {
-  const allComments = comments.map(comment => {
+  return comments.map(comment => {
     return comment.render();
   }).join('');
-
-  return `
-    <ul id="comments" class="list-unstyled">
-      ${allComments}
-    </ul>
-  `
 }

@@ -109,7 +109,9 @@ class Recipe {
   renderComments() {
     return `
       ${this.renderNewCommentForm()}
-      ${Comment.renderAll(this.comments)}
+      <ul id="comments" class="list-unstyled">
+        ${Comment.renderAll(this.comments)}
+      </ul>
     `
   }
 

@@ -58,9 +58,9 @@
     <h3>Comments</h3>
     <%= render 'comments/form' %>
 
-    <% if @comments.present? %>
+    <ul id="comments" class="list-unstyled">
       <%= render 'comments/recipe_comments', comments: @comments, recipe: @recipe %>
-    <% end %>
+    </ul>
 
   </div>
 </div>
