@@ -10,7 +10,27 @@ function sliceInThrees(arr) {
   return slicedArray;
 }
 
-function attachShowPageListeners() {
+function attachNewCommentFormSubmitListener() {
+  $('form#new_comment').on('submit', function(e) {
+    e.preventDefault();
+
+    const values = $(this).serialize();
+    const action = $(this).attr('action');
+
+    $.post(action, values).done(function(newCommentResponseJSON) {
+      const id = newCommentResponseJSON.data.id;
+      const attributes = newCommentResponseJSON.data.attributes;
+      const comment = new Comment(id, attributes);
+      const commentHTML = comment.render();
+
+      $('.recipe-comments ul').append(commentHTML);
+    });
+
+    $(this)[0].reset(); // clear the form values
+  });
+}
+
+function attachNextPreviousClickListeners() {
   $('.next-previous-links a').on('click', function(e) {
     e.preventDefault();
     // the id must be the id for the previous recipe which we can grab from the link
@@ -23,10 +43,12 @@ function attachShowPageListeners() {
 
       // loop through all the included comments and create a new Comment object
       let comments = [];
-      responseJSON.included.map(item => {
-        const comment = new Comment(item.id, item.attributes, id);
-        comments.push(comment);
-      });
+      if(responseJSON.included) {
+        responseJSON.included.map(item => {
+          const comment = new Comment(item.id, item.attributes);
+          comments.push(comment);
+        });  
+      }
 
       const recipe = new Recipe(id, attributes, comments);
       const recipeHTML = recipe.render();
@@ -34,7 +56,13 @@ function attachShowPageListeners() {
       $('#recipe').html(recipeHTML);
 
       console.log(responseJSON);
+
       attachShowPageListeners();
     })
   });
+}
+
+function attachShowPageListeners() {
+  attachNextPreviousClickListeners();
+  attachNewCommentFormSubmitListener();
 }

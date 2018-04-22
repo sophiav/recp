@@ -90,18 +90,34 @@ class Recipe {
     return '';
   }
 
-  renderComments() {
-    if(this.comments.length > 0) {
-      const allComments = this.comments.map(comment => {
-        return comment.render();
-      }).join('');
+  renderNewCommentForm() {
+    return `
+      <form class="new_comment" id="new_comment" action="/recipes/${this.id}/comments" accept-charset="UTF-8" method="post">
+        <input name="utf8" type="hidden" value="✓">
+        <input type="hidden" name="authenticity_token" value="${Rails.csrfToken()}">
+        <div class="form-group">
+          <textarea placeholder="Type in your comment..." class="form-control" name="comment[message]" id="comment_message"></textarea>
+        </div>
 
-      return `
-        <ul id="comments" class="list-unstyled">
-          ${allComments}
-        </ul>
-      `
-    }
+        <div class="form-buttons">
+          <input type="submit" name="commit" value="Create Comment" class="btn btn-primary" data-disable-with="Create Comment">
+        </div>
+      </form>
+    `
+  }
+
+  renderComments() {
+    const allComments = this.comments.map(comment => {
+      return comment.render();
+    }).join('');
+
+    return `
+      ${this.renderNewCommentForm()}
+      
+      <ul id="comments" class="list-unstyled">
+        ${allComments}
+      </ul>
+    `
   }
 
   render() {
@@ -143,11 +159,7 @@ class Recipe {
 
       <div class="recipe-comments">
         <h3>Comments</h3>
-
-        // form
-
         ${this.renderComments()}
-
       </div>
     `
   }

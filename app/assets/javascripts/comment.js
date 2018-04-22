@@ -1,5 +1,5 @@
 class Comment {
-  constructor(id, attributes, recipeId) {
+  constructor(id, attributes) {
     this.id = id;
     this.message = attributes.message;
     this.authorName = attributes['author-name'];
@@ -7,7 +7,7 @@ class Comment {
     this.updatedAt = attributes['updated-at'].slice(0, -1);
     this.isOwner = attributes['is-owner'];
 
-    this.recipeId = recipeId;
+    this.recipeId = attributes['recipe-id'];
   }
 
   renderEditControls() {

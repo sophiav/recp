@@ -20,7 +20,8 @@ class CommentsController < ApplicationController
     else
       flash[:alert] = "Cannot submit an empty comment"
     end
-    redirect_to recipe
+
+    render json: @comment
   end
 
   def edit

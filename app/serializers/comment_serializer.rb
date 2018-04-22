@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :author_name, :updated_at, :message, :is_owner
+  attributes :id, :author_name, :updated_at, :message, :is_owner, :recipe_id
 
   def author_name
     object.user.name.to_s
