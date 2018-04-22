@@ -33,4 +33,14 @@ class Recipe < ApplicationRecord
     comments.limit(3)
   end
 
+  def next
+    value = self.class.order(:id).where("id > ?", id).first
+    value ? value.id : nil
+  end
+
+  def previous
+    value = self.class.order(:id).where("id < ?", id).last
+    value ? value.id : nil
+  end
+
 end

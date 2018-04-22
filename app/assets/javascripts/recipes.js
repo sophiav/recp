@@ -7,6 +7,8 @@ class Recipe {
     this.prepTime = attributes['prep-time'];
     this.categories = attributes.categories;
     this.ingredients = attributes.ingredients;
+    this.next = attributes.next;
+    this.previous = attributes.previous;
   }
 
   renderForIndex() {
@@ -46,6 +48,23 @@ class Recipe {
         </tr>
       `
     }).join('');
+  }
+
+  renderPreviousAndNextLinks() {
+    const previous = this.previous
+      ? `<a href="#" data-id="${this.previous}" class="previous-link">Previous</a>`
+      : '';
+
+    const next = this.next
+      ? `<a href="#" data-id="${this.next}" class="next-link">Next</a>`
+      : '';
+
+    return `
+      <div class="next-previous-links">
+        ${previous}
+        ${next}
+      </div>
+    `
   }
 
   render() {
@@ -91,10 +110,7 @@ class Recipe {
           // render the edit/delete links
         </div>
 
-        <div class="next-previous-links">
-          <a href="#" data-id="20" class="previous-link">Previous</a>
-          <a href="#" class="next-link">Next</a>
-        </div>
+        ${this.renderPreviousAndNextLinks()}
 
       </div>
     `
