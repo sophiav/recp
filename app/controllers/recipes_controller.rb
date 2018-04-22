@@ -16,6 +16,11 @@ class RecipesController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @recipe.most_recent_comments
+
+    respond_to do |format|
+      format.json { render json: @recipe }
+      format.html
+    end
   end
 
   def new

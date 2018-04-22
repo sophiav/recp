@@ -1,48 +1,57 @@
-<h1 class="recipe-title text-center">
-  <%= @recipe.title %>
-</h1>
+<div id="recipe">
+  <h1 class="recipe-title text-center">
+    <%= @recipe.title %>
+  </h1>
 
-<h4 class="recipe-details text-center">
-  <small class="text-muted">
-    <%= display_recipe_categories(@recipe.categories) %>
-  </small>
-  <small><%= @recipe.prep_time %> minutes</small>
-</h4>
+  <h4 class="recipe-details text-center">
+    <small class="text-muted">
+      <%= display_recipe_categories(@recipe.categories) %>
+    </small>
+    <small><%= @recipe.prep_time %> minutes</small>
+  </h4>
 
-<% if @recipe.image.file? %>
-  <%= image_tag @recipe.image.url(:large), class: 'recipe-image img-fluid rounded mx-auto d-block' %>
-<% end %>
+  <% if @recipe.image.file? %>
+    <%= image_tag @recipe.image.url(:large), class: 'recipe-image img-fluid rounded mx-auto d-block' %>
+  <% end %>
 
-<div class="recipe-smaller-box">
-  <div class="recipe-ingredients">
-    <h3>Ingredients</h3>
-    <table>
-      <tbody>
-        <% @recipe.ingredients.each do |ingredient| %>
-          <tr>
-            <td class="ingredient-quantity"><%= ingredient.quantity %></td>
-            <td><%= ingredient.name %></td>
-          </tr>
-        <% end  %>
-      </tbody>
-    </table>
-  </div>
+  <div class="recipe-smaller-box">
+    <div class="recipe-ingredients">
+      <h3>Ingredients</h3>
+      <table>
+        <tbody>
+          <% @recipe.ingredients.each do |ingredient| %>
+            <tr>
+              <td class="ingredient-quantity"><%= ingredient.quantity %></td>
+              <td><%= ingredient.name %></td>
+            </tr>
+          <% end  %>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="recipe-instructions">
-    <h3>Instructions</h3>
-    <p class="text-justify"><%= @recipe.description %></p>
+    <div class="recipe-instructions">
+      <h3>Instructions</h3>
+      <p class="text-justify"><%= @recipe.description %></p>
 
-    <div class="btn-group" role="group">
-      <div class="form-buttons">
-        <% if owner?(@recipe) %>
-          <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: 'btn btn-outline-primary btn-sm'%>
-          <%= link_to "Delete Recipe", @recipe, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?"}, class: 'btn btn-outline-danger btn-sm' %>
-        <% end %>
+      <div class="btn-group" role="group">
+        <div class="form-buttons">
+          <% if owner?(@recipe) %>
+            <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: 'btn btn-outline-primary btn-sm'%>
+            <%= link_to "Delete Recipe", @recipe, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?"}, class: 'btn btn-outline-danger btn-sm' %>
+          <% end %>
+        </div>
       </div>
     </div>
+
+    <div class="next-previous-links">
+      <a href="#" data-id="20" class="previous-link">Previous</a>
+      <a href="#" class="next-link">Next</a>
+    </div>
+
   </div>
 
 </div>
+
 <div class="recipe-comments">
   <h3>Comments</h3>
   <%= render 'comments/form' %>
@@ -59,5 +68,16 @@
 
 </div>
 
-<%= link_to "<< Back to Recipes", root_path, class: 'btn btn-outline-primary btn-small back-to-recipes-button'%> 
+<%= link_to "<< Back to Recipes", root_path, class: 'btn btn-outline-primary btn-small back-to-recipes-button'%>
 
+<script type="text/javascript" charset="utf-8">
+  $('.previous-link').on('click', function(e) {
+    e.preventDefault();
+    // the id must be the id for the previous recipe which we can grab from the link
+    // get the results and replace the content on the page
+    const id = $(this).data('id');
+    $.get(`/recipes/${id}`).done(function(responseJSON) {
+      console.log(responseJSON);
+    })
+  })
+</script>
