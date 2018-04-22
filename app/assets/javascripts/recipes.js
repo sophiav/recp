@@ -107,16 +107,9 @@ class Recipe {
   }
 
   renderComments() {
-    const allComments = this.comments.map(comment => {
-      return comment.render();
-    }).join('');
-
     return `
       ${this.renderNewCommentForm()}
-      
-      <ul id="comments" class="list-unstyled">
-        ${allComments}
-      </ul>
+      ${Comment.renderAll(this.comments)}
     `
   }
 
